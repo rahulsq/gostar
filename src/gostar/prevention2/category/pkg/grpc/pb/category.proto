@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package pb;
+
+
+
+//The Category service definition.
+service Category {
+ rpc GetByName (GetByNameRequest) returns (GetByNameReply);
+}
+
+message GetByNameRequest {
+    string categoryName = 1
+}
+
+message GetByNameReply {
+    int categoryId = 1
+}
+

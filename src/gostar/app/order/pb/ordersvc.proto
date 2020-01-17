@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package pb;
+
+import "google/protobuf/timestamp.proto";
+
+// The Order service definition.
+service Order {
+  // Sums two integers.
+  rpc Sum (SumRequest) returns (SumReply) {}
+
+  // order details
+  rpc GetByID (GetByIDRequest) returns (GetByIDReply) {}
+
+}
+
+// The sum request contains two parameters.
+message SumRequest {
+  int64 a = 1;
+  int64 b = 2;
+}
+
+// The sum response contains the result of the calculation.
+message SumReply {
+  int64 v = 1;
+  string err = 2;
+}
+
+// The getbyid request contains order id.
+message GetByIDRequest {
+  string ID = 1;
+}
+
+// The getbyid request contains order object and error.
+message GetByIDReply {
+  message OrderData {
+    int64 ID =1;
+    int64 partner_id = 2;
+    string state = 3;
+    google.protobuf.Timestamp create_date = 4;
+    float amount_total = 5;
+    int32 warehouse_id  = 6;
+    message OrderItems {
+      int64 product_id =1;
+      string name = 2;
+      float price_unit = 3;
+      int32 quantity = 4;
+    }
+
+    repeated OrderItems order_items = 7;
+  }
+  OrderData order = 1;
+  string err = 2;    
+ 
+}
